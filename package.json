@@ -1,0 +1,19 @@
+{
+  "name": "desafio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "type": "module",
+  "scripts": {
+    "seed": "node seed.js",
+    "docker:up": "docker compose up --build -d",
+    "docker:down": "docker compose down",
+    "test:load": "docker run --rm -i grafana/k6 run - < k6.js"
+  },
+  "keywords": [],
+  "author": "Christopher Lee G. S. (ChrisCoy)",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.16.1"
+  }
+}
