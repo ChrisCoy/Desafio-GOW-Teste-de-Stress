@@ -153,9 +153,16 @@ function simpleAsciiHash(str) {
 
 async function start() {
   try {
-    // delay to ensure the database is ready
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    await pg.connect();
+    while (true) {
+      try {
+        await pg.connect();
+        console.log("Connected to PostgreSQL database");
+        break;
+      } catch (error) {
+        console.error("Failed to connect to PostgreSQL database, retrying...", error);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    }
 
     const apelidos = await pg.query("SELECT apelido FROM programadores");
 

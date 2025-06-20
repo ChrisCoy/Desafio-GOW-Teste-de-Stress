@@ -1,6 +1,5 @@
 import http from 'k6/http';
 import { check } from 'k6';
-import crypto from 'k6/crypto';
 
 export let options = {
   vus: 50,
@@ -16,10 +15,13 @@ const generateRandomDate = () => {
 
 export default function () {
   const payload = JSON.stringify({
-    apelido: `Apelido-${crypto.randomUUID()}`,
-    nome: `Pessoa ${crypto.randomUUID()}`,
+    apelido: `Apelido-${Math.random().toString(36).substring(2, 15)}`,
+    nome: `Pessoa ${Math.random().toString(36).substring(2, 15)}`,
     nascimento: generateRandomDate(),
   });
+
+  console.log(`Payload: ${payload}`);
+  
 
   const headers = { 'Content-Type': 'application/json' };
   const res = http.post('http://host.docker.internal:9999/programadores', payload, { headers });
