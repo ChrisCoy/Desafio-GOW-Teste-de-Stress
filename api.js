@@ -110,8 +110,8 @@ const server = http.createServer(async (req, res) => {
           return;
         }
 
-        res.writeHead(201, { location: `/programadores/${uuid.toString()}` });
-        res.end(process.env.INSTANCE_ID);
+        res.writeHead(201, { Location: `/programadores/${uuid.toString()}` });
+        res.end("ok");
       });
       break;
 
